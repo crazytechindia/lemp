@@ -6,10 +6,6 @@ apt-get update
 apt-get install vim curl gcc htop sysstat unzip wget ufw fail2ban -y
 apt-get install nginx -y
 apt-get install php5-fpm php5-mysql php5-gd php5-mcrypt php5-curl php5 -y
-DBRPASS=$(cat /dev/urandom  | tr -cd 'a-f0-9' | head -c 9)
-echo $DBRPASS > /usr/local/src/mysqlrootpasswd.txt
-debconf-set-selections <<< 'mysql-server mysql-server/root_password password $DBRPASS'
-debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password $DBRPASS'
 apt-get install mysql-server -y
 wget -O /tmp/phpmyadmin.zip http://repo.crazytechindia.com/src/phpmyadmin.zip
 cd /tmp
@@ -35,5 +31,3 @@ service mysql restart
 service fail2ban restart
 clear
 echo "Your Nginx Php Mysql setup for wordpress has been done successfully !"
-echo "Your mysql server root password is stored in /usr/local/src/mysqlrootpasswd.txt"
-echo "please do not remove above file"
